@@ -203,7 +203,14 @@ ENV GAZEBO_MODEL_PATH=${TB3_WS}/src/turtlebot3_simulations/turtlebot3_gazebo/mod
     VNC_PASSWORD=turtlebot3
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Windows checkouts turn LF into CRLF. A shell script with CRLF fails with the
+# baffling "/usr/bin/env: 'bash\r': No such file or directory". Strip it here so
+# the image builds identically from a Windows, macOS or Linux working copy.
+RUN sed -i '1s/^\xEF\xBB\xBF//' /usr/local/bin/entrypoint.sh \
+ && sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
+ && chmod +x /usr/local/bin/entrypoint.sh \
+ && head -1 /usr/local/bin/entrypoint.sh | grep -q '^#!/usr/bin/env bash$' \
+ && echo "entrypoint shebang OK"
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
