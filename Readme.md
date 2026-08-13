@@ -110,7 +110,7 @@ You have two options:
 
 ```bash
 docker pull ghcr.io/mahi-vea/cs7001:latest
-docker run -it ghcr.io/mahi-vea/cs7001:latest
+docker run -it -p 6080:6080 ghcr.io/mahi-vea/cs7001:latest
 ```
 
 Then open **<http://localhost:6080/vnc.html>** — password `turtlebot3`.
