@@ -50,7 +50,7 @@ no VcXsrv, no X11 configuration on any platform.
 First, clone this repository:
 
 ```bash
-git clone https://github.com/e-yantra/CS7001-docker-setup.git
+git clone https://github.com/mahi-vea/CS7001-docker-setup.git
 cd CS7001-docker-setup
 ```
 
@@ -109,8 +109,8 @@ You have two options:
 ### Option 1: Use the pre-built image (Recommended — fastest)
 
 ```bash
-docker pull ghcr.io/e-yantra/cs7001-ros2:latest
-docker run -it ghcr.io/e-yantra/cs7001-ros2:latest
+docker pull ghcr.io/mahi-vea/cs7001:latest
+docker run -it ghcr.io/mahi-vea/cs7001:latest
 ```
 
 Then open **<http://localhost:6080/vnc.html>** — password `turtlebot3`.
