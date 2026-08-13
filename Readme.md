@@ -1,6 +1,6 @@
 # ROS 2 Humble + Ignition Gazebo + TurtleBot3 — Docker
 
-A single container image that runs identically on **Windows**, **macOS** and **Ubuntu/Linux**.
+A single container image that runs identically on **Windows** and **Ubuntu/Linux**.
 
 | Component | Version |
 |---|---|
@@ -43,6 +43,15 @@ no VcXsrv, no X11 configuration on any platform.
 
 ## Setup
 
+### Clone the repository
+
+First, clone this repository:
+
+```bash
+git clone https://github.com/e-yantra/CS7001-docker-setup.git
+cd CS7001-docker-setup
+```
+
 ### Windows
 
 1. Install Docker Desktop:
@@ -78,13 +87,7 @@ no VcXsrv, no X11 configuration on any platform.
 
 ### macOS
 
-1. Install Docker Desktop — [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/)
-   or `brew install --cask docker`. Launch it and wait for the whale icon.
-2. Settings → Resources → at least 8 GB memory.
-3. **Apple Silicon (M1–M4): build natively.** ROS 2 Humble, Fortress and Gazebo
-   Classic all ship arm64 packages, so the normal build just works. Do *not*
-   force `--platform linux/amd64` — emulated Gazebo is unusably slow and
-   crashes on OpenGL calls.
+⚠️ **macOS is not currently supported.** This setup is only available for Windows and Ubuntu/Linux.
 
 ### Ubuntu / Linux
 
@@ -99,7 +102,7 @@ Log out and back in so the group change applies, then check with `docker ps`.
 
 ## Build and run
 
-Identical on every platform:
+Run these commands in your system's terminal (not inside Docker):
 
 ```bash
 docker compose build
@@ -109,20 +112,20 @@ docker compose logs -f
 
 Open **<http://localhost:6080/vnc.html>** — password `turtlebot3`.
 
-Get a shell:
+Get a shell (run on your system's terminal, not inside Docker):
 
 ```bash
 docker exec -it ros2-humble-tb3 bash
 ```
 
-Stop:
+Stop (run on your system's terminal):
 
 ```bash
 docker compose down
 ```
 
 If Docker has under 8 GB of RAM, build with one compile job so `colcon` isn't
-OOM-killed:
+OOM-killed (run on your system's terminal):
 
 ```bash
 docker compose build --build-arg PARALLEL_JOBS=1
@@ -179,8 +182,7 @@ The container has **no GPU access**, so all rendering is software (llvmpipe).
 
 **Linux users can do much better.** You have a real GPU, and mounting the X11
 socket with GPU passthrough makes Gazebo genuinely fast. That setup is
-Linux-only and is why this image defaults to software rendering — the default
-has to work on Windows and macOS too.
+Linux-only and is why this image defaults to software rendering.
 
 ---
 
@@ -239,7 +241,7 @@ Everything outside that directory is disposable.
 | Port 6080 in use | Change the left-hand side of the mapping in `docker-compose.yml`. |
 | Host ROS nodes can't see container nodes | Multicast DDS doesn't cross Docker's VM on Windows/macOS. Keep all nodes inside the container, or run a Fast DDS discovery server. |
 
-Deeper diagnosis:
+Deeper diagnosis (run on your system's terminal):
 
 ```bash
 docker cp diagnose.sh ros2-humble-tb3:/tmp/diagnose.sh
