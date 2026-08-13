@@ -37,7 +37,9 @@ no VcXsrv, no X11 configuration on any platform.
 
 - Docker with Compose v2
 - **8 GB RAM** available to Docker, **40 GB** free disk
-- The finished image is roughly 8–10 GB; first build takes 30–60 minutes
+
+> **Note:** If you use the **pre-built image** (Option 1 below), you only need Docker installed — no build time! The image is already built and ready to pull.
+> If you prefer to **build locally** (Option 2), the build takes 30–60 minutes on first run and requires **40 GB** free disk.
 
 ---
 
@@ -102,7 +104,20 @@ Log out and back in so the group change applies, then check with `docker ps`.
 
 ## Build and run
 
-Run these commands in your system's terminal (not inside Docker):
+You have two options:
+
+### Option 1: Use the pre-built image (Recommended — fastest)
+
+```bash
+docker pull ghcr.io/e-yantra/cs7001-ros2:latest
+docker run -it ghcr.io/e-yantra/cs7001-ros2:latest
+```
+
+Then open **<http://localhost:6080/vnc.html>** — password `turtlebot3`.
+
+### Option 2: Build the image locally
+
+If you want to customize the image or build it yourself, run these commands in your system's terminal (not inside Docker):
 
 ```bash
 docker compose build
