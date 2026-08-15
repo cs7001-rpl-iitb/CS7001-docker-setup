@@ -133,7 +133,23 @@ Get a shell (run on your system's terminal, not inside Docker):
 docker exec -it ros2-humble-tb3 bash
 ```
 
-Stop (run on your system's terminal):
+### Stopping and restarting (preserves your work)
+
+**Stop the container** (keeps all data and settings):
+
+```bash
+docker compose stop
+```
+
+**Restart it later** (everything is preserved):
+
+```bash
+docker compose start
+```
+
+> This approach preserves all files and work inside the container between sessions. You can safely stop the container without losing data, and restart it quickly without rebuilding.
+
+If you want to **completely remove** the container (cleans up disk space):
 
 ```bash
 docker compose down
