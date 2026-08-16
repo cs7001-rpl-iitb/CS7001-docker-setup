@@ -50,7 +50,7 @@ no VcXsrv, no X11 configuration on any platform.
 First, clone this repository:
 
 ```bash
-git clone https://github.com/mahi-vea/CS7001-docker-setup.git
+git clone https://github.com/cs7001-rpl-iitb/CS7001-docker-setup.git
 cd CS7001-docker-setup
 ```
 
