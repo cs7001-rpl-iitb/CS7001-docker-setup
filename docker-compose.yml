@@ -1,8 +1,16 @@
 services:
   ros2-tb3:
+    # Apple Silicon: ros-humble-ros-gz, ros-humble-ros-gz-sim and
+    # ros-humble-gazebo-ros-pkgs are published for amd64 ONLY -- a native arm64
+    # build fails at Dockerfile:73 with "Unable to locate package".
+    # (The Readme's "build natively on M1-M4" advice is incorrect on this point.)
+    # Emulation via Rosetta is therefore required; expect a slow build.
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
       args:
         PARALLEL_JOBS: "2"
     image: ros2-humble-tb3:latest
